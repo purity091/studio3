@@ -19,6 +19,7 @@ export interface StoryData {
   customCss?: string;
   theme: string;
   logo?: string;
+  logoId?: string;
 }
 
 export interface AppState {

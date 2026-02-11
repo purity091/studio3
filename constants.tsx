@@ -44,12 +44,34 @@ export const ICONS = {
 
 export const LOGO_SVG = (className?: string) => (
   <svg viewBox="0 0 100 100" className={className || "w-10 h-10"}>
-    <rect x="20" y="20" width="60" height="60" rx="12" fill="currentColor" opacity="0.1" />
-    <path d="M50 30V70M30 50H70" stroke="currentColor" strokeWidth="8" strokeLinecap="round" />
-    <circle cx="50" cy="50" r="10" fill="currentColor" />
-    <path d="M35 65L45 55M65 35L55 45" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+    <path d="M25 30V70M40 20V80M55 20V80M70 30V70" stroke="currentColor" strokeWidth="8" strokeLinecap="round" />
+    <path d="M40 50H55" stroke="currentColor" strokeWidth="8" strokeLinecap="round" />
   </svg>
 );
+
+export const LOGO_PRESETS = [
+  {
+    id: 'logo-main',
+    name: 'الشعار الرئيسي',
+    url: '/logos/Logo.svg'
+  },
+  {
+    id: 'logo-white',
+    name: 'شعار أبيض',
+    url: '/logos/alinvestor white.svg'
+  },
+  {
+    id: 'logo-v1',
+    name: 'نسخة 1',
+    url: '/logos/Logo (1).svg'
+  },
+  {
+    id: 'logo-v2',
+    name: 'نسخة 2',
+    url: '/logos/Logo (2).svg'
+  }
+];
+
 
 export const THEME_PRESETS = {
   default: {

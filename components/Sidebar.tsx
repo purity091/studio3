@@ -1,6 +1,6 @@
 import React from 'react';
 import { StoryData, StoryType } from '../types';
-import { ICONS, LOGO_SVG, THEME_PRESETS } from '../constants';
+import { ICONS, LOGO_SVG, THEME_PRESETS, LOGO_PRESETS } from '../constants';
 
 interface Props {
   data: StoryData;
@@ -120,27 +120,59 @@ const Sidebar: React.FC<Props> = ({
           </div>
         </div>
 
-        {/* Logo Upload */}
-        <div className="flex gap-2">
-          <label className="logo-upload-label">
-            <input type="file" accept="image/*" className="hidden" onChange={handleLogoUpload} />
-            {data.logo ? (
-              <img src={data.logo} alt="Logo" className="logo-preview" />
-            ) : (
-              <>
-                {ICONS.Layout}
-                <span className="logo-placeholder-text">رفع الشعار (يسار)</span>
-              </>
-            )}
+        {/* Logo Selection */}
+        <div className="space-y-3 mt-4">
+          <label className="section-label" style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+            {ICONS.Layout} اختيارات الشعار
           </label>
-          {data.logo && (
-            <button
-              onClick={() => updateField('logo', '')}
-              className="btn-remove-logo"
-            >
-              ×
-            </button>
-          )}
+          <div className="grid grid-cols-4 gap-2">
+            {LOGO_PRESETS.map((logo) => (
+              <button
+                key={logo.id}
+                onClick={() => {
+                  updateField('logoId', logo.id);
+                  updateField('logo', ''); // Clear custom logo if preset is selected
+                }}
+                className={`logo-preset-button ${data.logoId === logo.id && !data.logo ? 'active' : ''}`}
+                title={logo.name}
+              >
+                {/* @ts-ignore */}
+                {logo.svg ? logo.svg("w-full h-full p-1") : <img src={logo.url} alt={logo.name} className="w-full h-full object-contain p-1" />}
+              </button>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-2 py-2">
+            <div className="h-[1px] flex-1 bg-slate-700"></div>
+            <span className="text-[10px] text-slate-500 uppercase">أو ارفع شعارك الخاص</span>
+            <div className="h-[1px] flex-1 bg-slate-700"></div>
+          </div>
+
+          {/* Logo Upload */}
+          <div className="flex gap-2">
+            <label className={`logo-upload-label ${data.logo ? 'has-logo' : ''}`}>
+              <input type="file" accept="image/*" className="hidden" onChange={handleLogoUpload} />
+              {data.logo ? (
+                <img src={data.logo} alt="Logo" className="logo-preview" />
+              ) : (
+                <>
+                  {ICONS.Layout}
+                  <span className="logo-placeholder-text">رفع شعار مخصص</span>
+                </>
+              )}
+            </label>
+            {(data.logo || data.logoId) && (
+              <button
+                onClick={() => {
+                  updateField('logo', '');
+                  updateField('logoId', undefined);
+                }}
+                className="btn-remove-logo"
+              >
+                ×
+              </button>
+            )}
+          </div>
         </div>
       </div>
 

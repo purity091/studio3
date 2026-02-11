@@ -1,6 +1,6 @@
 import React from 'react';
 import { StoryData, StoryType } from '../types';
-import { LOGO_SVG, THEME_PRESETS } from '../constants';
+import { LOGO_SVG, THEME_PRESETS, LOGO_PRESETS } from '../constants';
 
 interface Props {
   data: StoryData;
@@ -53,14 +53,22 @@ const StoryCanvas: React.FC<Props> = ({ data }) => {
         </div>
       </div>
 
-      {/* 2b. Top Header Area (Left: Uploaded Logo) */}
-      {data.logo && (
+      {/* 2b. Top Header Area (Left: Uploaded Logo or Preset Logo) */}
+      {(data.logo || data.logoId) && (
         <div className="poster-logo-custom">
-          <img
-            src={data.logo}
-            alt="Custom Logo"
-            className="poster-logo-img"
-          />
+          {data.logo ? (
+            <img
+              src={data.logo}
+              alt="Custom Logo"
+              className="poster-logo-img"
+            />
+          ) : (
+            data.logoId && (() => {
+              const preset = LOGO_PRESETS.find(l => l.id === data.logoId);
+              // @ts-ignore
+              return preset?.svg ? preset.svg("poster-logo-img-svg") : <img src={preset?.url} alt="Logo" className="poster-logo-img" />;
+            })()
+          )}
         </div>
       )}
 

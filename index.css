@@ -526,6 +526,38 @@ body {
     font-weight: 700;
 }
 
+.logo-preset-button {
+    aspect-ratio: 1 / 1;
+    border-radius: 0.75rem;
+    border: 2px solid #e2e8f0;
+    background-color: #f8fafc;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+    padding: 2px;
+}
+
+.logo-preset-button:hover {
+    border-color: var(--color-investor-cyan);
+    transform: translateY(-2px);
+    background-color: white;
+}
+
+.logo-preset-button.active {
+    border-color: var(--color-investor-cyan);
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+}
+
+.logo-upload-label.has-logo {
+    border-style: solid;
+    border-color: var(--color-investor-cyan);
+    background-color: white;
+}
+
 .btn-remove-logo {
     width: 2.5rem;
     background-color: #fef2f2;
@@ -735,6 +767,12 @@ body {
     height: 3.5rem;
     width: auto;
     object-fit: contain;
+    filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
+}
+
+.poster-logo-img-svg {
+    height: 3.5rem;
+    width: 3.5rem;
     filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
 }
 
