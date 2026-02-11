@@ -1,20 +1,20 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# مصمم قصص الأخبار الاقتصادية - المستثمر
 
-# Run and deploy your AI Studio app
+نظام ذكي لتصميم وتوليد أخبار اقتصادية احترافية باستخدام الذكاء الاصطناعي.
 
-This contains everything you need to run your app locally.
+## متطلبات التشغيل
+- Node.js (Vite)
+- مفتاح API الخاص بـ Gemini
 
-View your app in AI Studio: https://ai.studio/apps/drive/1feKBgVAD2hhnOMu7V1VIDO5ruouqLAI3
+## التجهيز للرفع على Vercel
+1. قم بإنشاء مشروع جديد على [Vercel](https://vercel.com/new).
+2. اربط المستودع الخاص بك.
+3. في إعدادات البيئة (Environment Variables)، أضف المتغير التالي:
+   - `GEMINI_API_KEY`: مفتاحك الخاص من [Google AI Studio](https://aistudio.google.com/).
+4. اترك إعدادات البناء الافتراضية كما هي (Vite).
 
-## Run Locally
-
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## المميزات
+- توليد محتوى أخباري ذكي.
+- توليد صور خلفية سينمائية.
+- تخصيص كامل للثيمات والألوان.
+- تصدير التصاميم بجودة عالية (PNG).
