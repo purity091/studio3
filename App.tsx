@@ -66,12 +66,13 @@ const App: React.FC = () => {
     try {
       // Small delay to ensure any pending renders are complete
       await new Promise(resolve => setTimeout(resolve, 500));
-      
+
       const dataUrl = await htmlToImage.toPng(node, {
         quality: 1,
-        pixelRatio: 2, // High resolution
+        pixelRatio: 3,
+        cacheBust: true,
       });
-      
+
       const link = document.createElement('a');
       link.download = `investor-${Date.now()}.png`;
       link.href = dataUrl;
@@ -86,8 +87,8 @@ const App: React.FC = () => {
 
   return (
     <div className="app-container">
-      <Sidebar 
-        data={story} 
+      <Sidebar
+        data={story}
         onChange={setStory}
         onGenerateAI={handleGenerateAI}
         onGenerateImage={handleGenerateImage}
@@ -97,7 +98,7 @@ const App: React.FC = () => {
 
       <main className="main-content">
         <div className="content-wrapper">
-          
+
           <div className="header-section">
             <h2>استوديو التصميم</h2>
             <p>نظام التصميم الذكي - الهوية الجديدة</p>
@@ -105,7 +106,7 @@ const App: React.FC = () => {
 
           <div className="canvas-container">
             <StoryCanvas data={story} />
-            
+
             {/* Status Overlays */}
             {(isGenerating || isGeneratingImage || isDownloading) && (
               <div className="status-overlay">
@@ -118,7 +119,7 @@ const App: React.FC = () => {
           </div>
 
           <div className="actions-container">
-            <button 
+            <button
               onClick={handleDownload}
               disabled={isDownloading}
               className="btn-download"
@@ -126,8 +127,8 @@ const App: React.FC = () => {
               {isDownloading ? <div className="btn-download-spinner" /> : ICONS.Download}
               <span>تحميل التصميم (PNG)</span>
             </button>
-            
-            <button 
+
+            <button
               onClick={() => {
                 const text = `${story.title}\n${story.subtitle}\n#المستثمر #أخبار_اقتصادية`;
                 navigator.clipboard.writeText(text);
@@ -140,11 +141,11 @@ const App: React.FC = () => {
             </button>
           </div>
         </div>
-        
+
         {/* Decorative background elements */}
         <div className="background-decor">
-           <div className="blob-1"></div>
-           <div className="blob-2"></div>
+          <div className="blob-1"></div>
+          <div className="blob-2"></div>
         </div>
       </main>
     </div>

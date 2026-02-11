@@ -8,7 +8,7 @@
     --color-investor-dark: #020617;
 
     --font-sans: 'IBM Plex Sans Arabic', sans-serif;
-    --font-news: 'Cairo', sans-serif;
+    --font-news: 'IBM Plex Sans Arabic', 'Cairo', sans-serif;
 }
 
 body {
