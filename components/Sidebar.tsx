@@ -35,6 +35,18 @@ const Sidebar: React.FC<Props> = ({
     }
   };
 
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        if (event.target?.result) {
+          updateField('image', event.target.result as string);
+        }
+      };
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  };
+
   return (
     <div className="sidebar-container">
       {/* Header */}
@@ -91,14 +103,21 @@ const Sidebar: React.FC<Props> = ({
             )}
           </div>
 
-          <button
-            onClick={onGenerateImage}
-            disabled={isGeneratingImage}
-            className={`btn-image-generate ${isGeneratingImage ? 'loading' : ''}`}
-          >
-            {isGeneratingImage ? null : ICONS.Refresh}
-            <span>{isGeneratingImage ? 'جاري المعالجة...' : 'توليد صورة بالذكاء الاصطناعي'}</span>
-          </button>
+          <div className="grid grid-cols-2 gap-2">
+            <button
+              onClick={onGenerateImage}
+              disabled={isGeneratingImage}
+              className={`btn-image-generate ${isGeneratingImage ? 'loading' : ''}`}
+            >
+              {isGeneratingImage ? null : ICONS.Refresh}
+              <span>{isGeneratingImage ? 'جاري...' : 'ذكاء اصطناعي'}</span>
+            </button>
+            <label className="btn-image-generate">
+              <input type="file" accept="image/*" className="hidden" onChange={handleImageUpload} />
+              {ICONS.Image}
+              <span>رفع صورة</span>
+            </label>
+          </div>
         </div>
 
         {/* Logo Upload */}
