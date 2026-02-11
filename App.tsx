@@ -39,8 +39,12 @@ const App: React.FC = () => {
         ...prev,
         ...generated as StoryData
       }));
-    } catch (error) {
-      alert("عذراً، حدث خطأ في النظام الذكي.");
+    } catch (error: any) {
+      if (error.message === 'API_KEY_MISSING') {
+        alert("خطأ: مفتاح API غير موجود. يرجى إعداد GEMINI_API_KEY في ملف .env");
+      } else {
+        alert("عذراً، حدث خطأ في النظام الذكي.");
+      }
     } finally {
       setIsGenerating(false);
     }
@@ -51,8 +55,12 @@ const App: React.FC = () => {
     try {
       const imageUrl = await generateStoryImage(story.title);
       setStory(prev => ({ ...prev, image: imageUrl }));
-    } catch (error) {
-      alert("فشل توليد الصورة، جرب مرة أخرى.");
+    } catch (error: any) {
+      if (error.message === 'API_KEY_MISSING') {
+        alert("خطأ: مفتاح API غير موجود. يرجى إعداد GEMINI_API_KEY في ملف .env");
+      } else {
+        alert("فشل توليد الصورة، جرب مرة أخرى.");
+      }
     } finally {
       setIsGeneratingImage(false);
     }

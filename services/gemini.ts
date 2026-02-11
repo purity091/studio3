@@ -1,11 +1,20 @@
-
 import { GoogleGenAI, Type } from "@google/genai";
 import { StoryType, StoryData } from "../types";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || "" });
+let aiInstance: GoogleGenAI | null = null;
+const getAI = () => {
+  if (aiInstance) return aiInstance;
+
+  const key = process.env.GEMINI_API_KEY || process.env.API_KEY;
+  if (!key) {
+    throw new Error("API_KEY_MISSING");
+  }
+  aiInstance = new GoogleGenAI({ apiKey: key });
+  return aiInstance;
+};
 
 export const generateStoryContent = async (userInput: string): Promise<Partial<StoryData>> => {
-  const response = await ai.models.generateContent({
+  const response = await getAI().models.generateContent({
     model: "gemini-3-flash-preview",
     contents: `أنت محرر صحفي مخضرم في قسم الاقتصاد. صغ الخبر التالي بأسلوب 'قناة الجزيرة' القوي والاحترافي.
     المدخل: ${userInput}
@@ -44,8 +53,8 @@ export const generateStoryContent = async (userInput: string): Promise<Partial<S
 
 export const generateStoryImage = async (prompt: string): Promise<string> => {
   const finalPrompt = `Professional news broadcast background, cinematic business photography, high contrast, editorial style, 4k, no text, subject: ${prompt}`;
-  
-  const response = await ai.models.generateContent({
+
+  const response = await getAI().models.generateContent({
     model: 'gemini-2.5-flash-image',
     contents: {
       parts: [{ text: finalPrompt }],
@@ -57,6 +66,6 @@ export const generateStoryImage = async (prompt: string): Promise<string> => {
       return `data:image/png;base64,${part.inlineData.data}`;
     }
   }
-  
+
   return `https://picsum.photos/1200/1600?random=${Math.random()}`;
 };
