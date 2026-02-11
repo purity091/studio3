@@ -100,9 +100,9 @@ const StoryCanvas: React.FC<Props> = ({ data }) => {
 
         {/* Footer Info */}
         <div className="poster-footer">
-          <span className="font-mono" style={{ color: theme.accent }}>INVESTOR.MEDIA</span>
+          <span className="font-mono" style={{ color: theme.accent }}>منصة المستثمر</span>
           <div className="poster-footer-right">
-            <span>شبكة المستثمر الاقتصادية</span>
+            <span>al-investor.com</span>
           </div>
         </div>
       </div>
